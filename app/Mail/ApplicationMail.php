@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Mail;
+
+use App\Visitor;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class ApplicationMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $visitor;
+
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct(Visitor $visitor)
+    {
+        $this->visitor = $visitor;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->subject('TEDxAzharUniversity Ticket')->view('email');
+    }
+}
